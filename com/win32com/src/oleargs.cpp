@@ -5,6 +5,19 @@
 #include "stdafx.h"
 #include "PythonCOM.h"
 
+// ACC hack: Access the _PyLong_NumBits and _PyLong_Sign internal APIs by manually re-declaring them.
+//   '#include <internal/pycore_long.h>' does not work because Python declines to fix their
+//   internal headers to use extern "C" properly.
+// See https://github.com/python/cpython/issues/115105
+#ifdef __cplusplus
+extern "C" {
+#endif
+PyAPI_FUNC(size_t) _PyLong_NumBits(PyObject *v);
+PyAPI_FUNC(int) _PyLong_Sign(PyObject *v);
+#ifdef __cplusplus
+}
+#endif
+
 extern PyObject *PyObject_FromRecordInfo(IRecordInfo *, void *, ULONG);
 extern PyObject *PyObject_FromSAFEARRAYRecordInfo(SAFEARRAY *psa);
 extern BOOL PyObject_AsVARIANTRecordInfo(PyObject *ob, VARIANT *pv);

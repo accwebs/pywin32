@@ -2569,7 +2569,8 @@ extern "C" PYW_EXPORT BOOL Win32uiApplicationInit(Win32uiHostGlue *pGlue, const 
         int myargc;
         LPWSTR *myargv = CommandLineToArgvW(GetCommandLineW(), &myargc);
         if (myargv) {
-            PySys_SetArgv(myargc - 1, myargv + 1);
+            // ACC: Temp hack to make this compile: this API removed in Python 3.13
+            // PySys_SetArgv(myargc - 1, myargv + 1);
             LocalFree(myargv);
         }
     }

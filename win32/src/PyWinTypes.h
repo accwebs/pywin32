@@ -724,4 +724,6 @@ class TmpPyObject {
     ~TmpPyObject() { Py_XDECREF(tmp); }
 };
 
+#include "MissingApiAdapter.h"
+
 #endif  // __PYWINTYPES_H__

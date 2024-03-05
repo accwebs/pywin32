@@ -1,0 +1,8 @@
+Visual Studio 2019 setup:
+  "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\vc\Auxiliary\Build\vcvarsall.bat" x86_amd64 8.1 -vcvars_ver=14.2
+
+Patches to Python 3.13a4 headers:
+  - Apply this fix: https://github.com/python/cpython/pull/115561/commits/b77ecfea17561c635cc2c3da27124326ddb90a46
+  - Comment out '#define Py_GIL_DISABLED 1' line in pyconfig.h
+
+Visual Studio 2022 does not work with setup.py logic that tries to locate MSVC redistributable files.

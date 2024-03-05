@@ -1126,6 +1126,7 @@ class my_install_data(install_data):
 pywintypes = WinExt_system32(
     "pywintypes",
     sources=[
+        "win32/src/MissingApiAdapter.cpp",
         "win32/src/PyACL.cpp",
         "win32/src/PyDEVMODE.cpp",
         "win32/src/PyHANDLE.cpp",
@@ -1141,6 +1142,7 @@ pywintypes = WinExt_system32(
         "win32/src/PyWinTypesmodule.cpp",
     ],
     depends=[
+        "win32/src/MissingApiAdapter.h",
         "win32/src/PyWinObjects.h",
         "win32/src/PyWinTypes.h",
         "win32/src/PySoundObjects.h",

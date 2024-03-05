@@ -306,7 +306,9 @@ HRESULT DoRegisterUnregister(LPCSTR fileName, int argc, char **argv)
     PyCom_DLLAddRef();
     {  // A scope for _celp
         CEnterLeavePython _celp;
-        PySys_SetArgv(argc, __wargv);
+
+        // ACC: Temp hack to make this compile: this API removed in Python 3.13
+        // PySys_SetArgv(argc, __wargv);
 
         if (PyRun_SimpleFile(fp, (char *)fileName) != 0) {
             // Convert the Python error to a HRESULT.

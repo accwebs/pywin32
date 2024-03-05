@@ -603,8 +603,10 @@ static void PyService_InitPython()
     // knows how to get the .EXE name when it needs.
     int pyargc;
     WCHAR **pyargv = CommandLineToArgvW(GetCommandLineW(), &pyargc);
-    if (pyargv)
-        Py_SetProgramName(pyargv[0]);
+
+    // ACC: Temp hack to make this compile: this API removed in Python 3.13
+    // if (pyargv)
+    //     Py_SetProgramName(pyargv[0]);
 
 #ifdef BUILD_FREEZE
     PyInitFrozenExtensions();
@@ -622,8 +624,10 @@ static void PyService_InitPython()
     // isn't ideal, but has been this way for a few builds, and a good
     // fix isn't clear - should 'servicename' be presented in argv, even
     // though it never is when running as a real service?
-    if (pyargv)
-        PySys_SetArgv(pyargc, pyargv);
+
+    // ACC: Temp hack to make this compile: this API removed in Python 3.13
+    // if (pyargv)
+    //     PySys_SetArgv(pyargc, pyargv);
     PyInit_servicemanager();
     LocalFree(pyargv);
 }
@@ -1450,7 +1454,8 @@ int _tmain(int argc, TCHAR **argv)
     int dummy;
     wchar_t **program = CommandLineToArgvW(GetCommandLineW(), &dummy);
     if (program != NULL) {
-        Py_SetProgramName(program[0]);
+        // ACC: Temp hack to make this compile: this API removed in Python 3.13
+        // Py_SetProgramName(program[0]);
         // do not free `program` since Py_SetProgramName does not copy it.
     }
     Py_Initialize();
